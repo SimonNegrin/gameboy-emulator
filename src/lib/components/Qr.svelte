@@ -7,10 +7,10 @@
   let canvasEl
 
   onMount(() => {
-    const url = new URL('/gamepad', import.meta.env.VITE_REAL_TIME_SERVICE)
+    const url = new URL(import.meta.env.VITE_GAMEPAD)
     url.searchParams.set('emuId', emuId)
-    console.log(`Gamepad url: ${url.toString()}`)
     toCanvas(canvasEl, url.toString())
+    console.log(`Gamepad url: ${url}`)
   })
 
 </script>
