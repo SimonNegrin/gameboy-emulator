@@ -1,11 +1,14 @@
 <script>
 
-  import { onMount } from 'svelte'
-  import { Gameboy } from 'gameboy-emulator'
+  import { Gameboy } from '../services/gameboy/gameboy.js'
+  import { onMount, onDestroy } from 'svelte'
+  import { gamepadState } from '../services/realTime'
 
   const gameboy = new Gameboy()
 
   let canvasEl
+
+  $: updateGameboyInput($gamepadState)
 
   onMount(async () => {
     const context = canvasEl.getContext('2d')
@@ -19,9 +22,24 @@
     gameboy.run()
   })
 
+  onDestroy(() => {
+    gameboy.stop()
+  })
+
   async function getRom() {
     const response = await fetch(import.meta.env.VITE_ROM)
     return response.arrayBuffer()
+  }
+
+  function updateGameboyInput(gamepadState) {
+    gameboy.input.isPressingUp = gamepadState.up
+    gameboy.input.isPressingDown = gamepadState.down
+    gameboy.input.isPressingLeft = gamepadState.left
+    gameboy.input.isPressingRight = gamepadState.right
+    gameboy.input.isPressingSelect = gamepadState.select
+    gameboy.input.isPressingStart = gamepadState.start
+    gameboy.input.isPressingA = gamepadState.actionA
+    gameboy.input.isPressingB = gamepadState.actionB
   }
 
 </script>
