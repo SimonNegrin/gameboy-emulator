@@ -42,6 +42,7 @@ function createConnection(emuId) {
 
 function updateGamepadState(data) {
   const byte = data[1]
+  console.log(byte.toString(2).padStart(8, '0'))
   gamepadState.set({
     up          : Boolean(byte & 1 << 7),
     bottom      : Boolean(byte & 1 << 6),

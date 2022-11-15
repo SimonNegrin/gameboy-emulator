@@ -30,7 +30,7 @@
 
   function updateGameboyInput(gamepadState) {
     gameboy.input.isPressingUp = gamepadState.up
-    gameboy.input.isPressingDown = gamepadState.down
+    gameboy.input.isPressingDown = gamepadState.bottom
     gameboy.input.isPressingLeft = gamepadState.left
     gameboy.input.isPressingRight = gamepadState.right
     gameboy.input.isPressingSelect = gamepadState.select
