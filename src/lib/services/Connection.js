@@ -4,7 +4,7 @@ export default class Connection extends EventTarget {
   #connRetryTime = 1500
   #isStarted = false
   #serviceUrl
-  #ws
+  #ws = undefined
 
   constructor(serviceUrl) {
     super()
