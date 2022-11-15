@@ -23,10 +23,11 @@ export default class Connection extends EventTarget {
     if (this.#ws) {
       return
     }
-    this.#ws = new WebSocket(this.#serviceUrl)
-    this.#ws.addEventListener('close', () => this.#onClose())
-    this.#ws.addEventListener('open', () => this.#onOpen())
-    this.#ws.addEventListener('message', event => this.#onMessage(event))
+    const ws = new WebSocket(this.#serviceUrl)
+    ws.addEventListener('close', () => this.#onClose())
+    ws.addEventListener('open', () => this.#onOpen())
+    ws.addEventListener('message', event => this.#onMessage(event))
+    this.#ws = ws
   }
 
   #onOpen() {
