@@ -12,14 +12,14 @@
 
   $: updateGameboyInput($gamepadState)
 
-  onMount(() => {
+  onMount(async () => {
     const context = canvasEl.getContext('2d')
     
     gameboy.onFrameFinished(imageData => {
       context.putImageData(imageData, 0, 0)
     })
 
-    gameboy.loadGame(romFile)
+    gameboy.loadGame(await romFile.arrayBuffer())
     // gameboy.apu.enableSound()
     gameboy.run()
   })
