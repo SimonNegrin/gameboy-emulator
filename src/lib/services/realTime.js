@@ -5,8 +5,7 @@ const PACKET_GAMEPAD_CONNECTED    = 1
 const PACKET_GAMEPAD_DISCONNECTED = 2
 const PACKET_GAMEPAD_STATE        = 3
 
-// export const emuId = window.crypto.randomUUID()
-export const emuId = '1'
+export const emuId = window.crypto.randomUUID()
 export const gamepadConnected = writable(false)
 export const gamepadState = writable({
   up          : false,
@@ -26,7 +25,7 @@ const packetRouter = {
 }
 
 const connection = createConnection(emuId)
-// connection.start()
+connection.start()
 
 // @ts-ignore
 connection.addEventListener('message', async ({ detail }) => {
