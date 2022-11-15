@@ -4,32 +4,29 @@
   import { onMount, onDestroy } from 'svelte'
   import { gamepadState } from '../services/realTime'
 
+  export let romFile
+
   const gameboy = new Gameboy()
 
   let canvasEl
 
   $: updateGameboyInput($gamepadState)
 
-  onMount(async () => {
+  onMount(() => {
     const context = canvasEl.getContext('2d')
     
     gameboy.onFrameFinished(imageData => {
       context.putImageData(imageData, 0, 0)
     })
 
-    gameboy.loadGame(await getRom())
-    gameboy.apu.enableSound()
+    gameboy.loadGame(romFile)
+    // gameboy.apu.enableSound()
     gameboy.run()
   })
 
   onDestroy(() => {
     gameboy.stop()
   })
-
-  async function getRom() {
-    const response = await fetch(import.meta.env.VITE_ROM)
-    return response.arrayBuffer()
-  }
 
   function updateGameboyInput(gamepadState) {
     gameboy.input.isPressingUp = gamepadState.up

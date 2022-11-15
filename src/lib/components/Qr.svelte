@@ -9,7 +9,10 @@
   onMount(() => {
     const url = new URL(import.meta.env.VITE_GAMEPAD)
     url.searchParams.set('emuId', emuId)
-    toCanvas(canvasEl, url.toString())
+    toCanvas(canvasEl, url.toString(), {
+      width: 300,
+      height: 300,
+    })
     console.log(`Gamepad url: ${url}`)
   })
 

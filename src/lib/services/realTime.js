@@ -26,7 +26,7 @@ const packetRouter = {
 }
 
 const connection = createConnection(emuId)
-connection.start()
+// connection.start()
 
 // @ts-ignore
 connection.addEventListener('message', async ({ detail }) => {
